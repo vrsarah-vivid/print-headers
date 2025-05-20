@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "request",
+#     "streamlit",
+# ]
+# ///
 import streamlit as st
 import requests
 import json
