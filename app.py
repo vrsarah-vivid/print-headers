@@ -1,10 +1,3 @@
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#     "request",
-#     "streamlit",
-# ]
-# ///
 import streamlit as st
 import requests
 import json
@@ -12,9 +5,6 @@ from pprint import pformat
 
 
 def main():
-    st.title("HTTP Headers Inspector")
-    st.write("This app shows HTTP request headers, focusing on X-Forwarded-For")
-
     # Add an explanation
     st.markdown("""
     ## About X-Forwarded-For
@@ -24,38 +14,10 @@ def main():
     """)
 
     # Display current request headers
-    st.header("Your Current Request Headers")
+    st.header("Your Request Headers")
 
     # Get headers from the streamlit request
-    headers = st.experimental_get_query_params()
-
-    # Try to get the Streamlit session information which may contain header data
-    st.subheader("Streamlit Session Info")
-    session_info = st.session_state.to_dict()
-    st.code(pformat(session_info), language="python")
-
-    # Alternative approach: Make a request to a header echo service
-    st.header("Headers Echo Service")
-    if st.button("Fetch Headers from httpbin.org"):
-        try:
-            response = requests.get("https://httpbin.org/headers")
-            if response.status_code == 200:
-                headers_data = response.json()
-
-                # Check if X-Forwarded-For exists
-                x_forwarded = headers_data.get('headers', {}).get('X-Forwarded-For')
-
-                if x_forwarded:
-                    st.success(f"X-Forwarded-For header found: {x_forwarded}")
-                else:
-                    st.info("No X-Forwarded-For header detected")
-
-                # Display all headers
-                st.json(headers_data)
-            else:
-                st.error(f"Failed to get headers: {response.status_code}")
-        except Exception as e:
-            st.error(f"Error fetching headers: {e}")
+    headers = st.query_params
 
     # Manual header input for testing
     st.header("Test with Custom Headers")
