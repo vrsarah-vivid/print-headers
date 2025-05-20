@@ -62,9 +62,7 @@ referencing==0.36.2
     #   jsonschema
     #   jsonschema-specifications
 requests==2.32.3
-    # via
-    #   streamlit-headers-inspector (pyproject.toml)
-    #   streamlit
+    # via streamlit
 rpds-py==0.25.0
     # via
     #   jsonschema
